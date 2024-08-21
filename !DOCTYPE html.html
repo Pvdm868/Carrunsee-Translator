@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fine to Reward Converter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            text-align: center;
+        }
+        .container {
+            display: flex;
+            justify-content: center; /* Center the content horizontally */
+            align-items: center; /* Align content vertically in the center */
+            margin-top: 20px;
+        }
+        .center-image {
+            margin-right: 20px; /* Space between the center image and result section */
+        }
+        .result-section {
+            text-align: centre; /* Align the text and image to the left within the section */
+        }
+        .reward-image {
+            display: centre;
+            margin-top: 10px;
+            max-width: 100px; /* Adjust the size of the image */
+            height: auto;
+        }
+        #result {
+            font-weight: bold;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Carransee Converter</h1>
+    
+    <div class="container">
+        <!-- Center Image -->
+        <div class="center-image">
+            <img src="C:\Users\p.vandermerwe\OneDrive - Total Specific Solutions\Desktop\OIP.jpeg" alt="Center Image">
+        </div>
+        
+        <!-- Result Section -->
+        <div class="result-section">
+            <form id="fineForm">
+                <div class="form-group">
+                    <label for="fine">Select Fine:</label>
+                    <select id="fine" name="fine">
+                        <option value="" disabled selected>Select a fine</option>
+                        <option value="1">1 Fine</option>
+                        <option value="3">3 Fines</option>
+                        <option value="5">5 Fines</option>
+                    </select>
+                </div>
+            </form>
+            
+            <div id="result"></div>
+        </div>
+    </div>
+
+    <script>
+        // Define the fine to reward mapping with images
+        const fineRewards = {
+            1: {
+                text: "1 x Ice Cream",
+                image: "Ice Cream.png" // Path to your ice cream image
+            },
+            3: {
+                text: "1 x Activity or Meal (Low value)",
+                image: "Meal_Activity.jpeg" // Path to your low-value meal image
+            },
+            5: {
+                text: "1 x Activity or Meal (High value)",
+                image: "HV.png" // Path to your high-value meal image
+            }
+        };
+
+        // Get the form and result div
+        const form = document.getElementById('fineForm');
+        const resultDiv = document.getElementById('result');
+
+        // Add event listener to the select input
+        form.fine.addEventListener('change', function() {
+            const selectedFine = this.value;
+            const reward = fineRewards[selectedFine];
+            
+            if (reward) {
+                resultDiv.innerHTML = `
+                    The reward for ${selectedFine} Fine(s) is: <strong>${reward.text}</strong>
+                    <br>
+                    <img src="${reward.image}" alt="${reward.text}" class="reward-image">
+                `;
+            } else {
+                resultDiv.innerHTML = '';
+            }
+        });
+    </script>
+
+</body>
+</html>
